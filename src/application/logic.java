@@ -1,10 +1,7 @@
 package application;
 import java.util.Scanner;
 public class logic {
-package application;
-import java.util.Scanner;
 
-    public class application {
 
         int red = 1;
         int black = 2;
@@ -253,5 +250,5 @@ import java.util.Scanner;
             return c;
 
         }
-    }
+
 }
