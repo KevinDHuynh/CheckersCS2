@@ -78,4 +78,8 @@ public class Piece extends StackPane
 	{
 		relocate(lastX, lastY);
 	}
+
+	public void setTeam(PieceType p) {
+		type = p;
+	}
 }

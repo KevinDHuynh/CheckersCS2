@@ -108,16 +108,35 @@ public class Board extends Application
 		return SQUARE;
 	}
 	
-	private MoveResult tryMove(Piece piece, int newX, int newY) 
+	private MoveResult tryMove(Piece piece, int newX, int newY)
 	{
-        if (boardContent[newX][newY].hasPiece() || (newX + newY) % 2 == 0) 
+	    /**
+        if (boardContent[newX][newY].hasPiece() //|| (newX + newY) % 2 == 0
+        )
         {
             return new MoveResult(MoveType.NONE);
         }
+         **/
 
         int x0 = boardLocation(piece.getLastX());
         int y0 = boardLocation(piece.getLastY());
+        if (piece.getTeam() == PieceType.BLACK){
+            if (boardContent[newX][newY].hasPiece())
+                return new MoveResult(MoveType.NONE);
+        //-1
+            boardContent[x0][y0].removePiece();
+            //boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
+            return new MoveResult(MoveType.NORMAL);
 
+        }
+        if (piece.getTeam() == PieceType.RED){
+            if (boardContent[newX][newY].hasPiece())
+                return new MoveResult(MoveType.NONE);
+            boardContent[x0][y0].removePiece();
+            return new MoveResult(MoveType.NORMAL);
+        //1
+        }
+        /**
         if (Math.abs(newX - x0) == 1 && newY - y0 == piece.getTeam().moveDir) 
         {
             return new MoveResult(MoveType.NORMAL);
@@ -132,7 +151,7 @@ public class Board extends Application
                 return new MoveResult(MoveType.KILL, boardContent[x1][y1].getPiece());
             }
         }
-
+        **/
         return new MoveResult(MoveType.NONE);
     }
 	
@@ -183,7 +202,7 @@ public class Board extends Application
                             return piece;
                             }
 
-public static void main(String[] args){
+    public static void main(String[] args){
         launch(args);
         }
-        }
+}

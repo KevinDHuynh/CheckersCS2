@@ -11,6 +11,7 @@ public class Square extends Rectangle
 	{
 		this.piece = piece;
 	}
+	public void removePiece() {this.piece = null;}
 	public boolean hasPiece()
 	{
 		return piece != null;

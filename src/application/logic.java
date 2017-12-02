@@ -5,12 +5,20 @@ public class logic {
 
         int red = 1;
         int black = 2;
-        public static void main(String[] args) {
+        int[][] board;
+        static Scanner in = new Scanner(System.in);
+        public logic() {
             // TODO Auto-generated method stub
-            int[][] board = new int[8][8];
-            Scanner in = new Scanner(System.in);
+            this.board = new int[8][8];
+
             boardReset(board);
 
+
+        }
+        public int[][] getBoard(){
+            return this.board;
+        }
+        public void continueGame(){
             while(!winYet(board)) {
                 printBoard(board);
                 System.out.println("Select Piece: ");
@@ -51,7 +59,7 @@ public class logic {
             if (red ^ black) return true;
             return false;
         }
-        public static void boardReset(int[][] board){
+        public void boardReset(int[][] board){
             for (int i = 0; i<8; i++) {
                 if (i == 0 || i == 2) {
                     for (int k = 0; k<8; k++) {
