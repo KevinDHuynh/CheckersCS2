@@ -40,7 +40,10 @@ public class Board extends Application
 		pane.getChildren().addAll(squares, pieces);
 		
 		Button play = new Button("Let's Party");
-		
+
+		logic Logic = new logic();
+		int[][] board = Logic.getBoard();
+
 		for(int y = 0; y < HEIGHT; y++)
 		{
 			for(int x = 0; x < WIDTH; x++)
@@ -50,7 +53,16 @@ public class Board extends Application
 				square.setStrokeWidth(1);
 				boardContent[x][y] = square;
 				squares.getChildren().add(square);
-				
+
+				Piece p = null;
+				if (board[y][x] == 1){
+                    p = makePiece(PieceType.RED, x, y);
+				}
+                if (board[y][x] == 2){
+                    p = makePiece(PieceType.BLACK, x, y);
+                }
+
+                /**
 				Piece p = null;
 				
 				if (y <= 2 && (x + y) % 2 != 0) 
@@ -62,12 +74,13 @@ public class Board extends Application
                 {
                     p = makePiece(PieceType.BLACK, x, y);
                 }
-
+                **/
                 if (p != null) 
                 {
                     square.setPiece(p);
                     pieces.getChildren().add(p);
                 }
+
 			}
 		}
 		root.getChildren().addAll(pane, hBox);
@@ -154,24 +167,23 @@ public class Board extends Application
                     piece.move(newX, newY);
                     boardContent[x0][y0].setPiece(null);
                     boardContent[newX][newY].setPiece(piece);
-                    break;
-                case KILL:
-                    piece.move(newX, newY);
-                    boardContent[x0][y0].setPiece(null);
-                    boardContent[newX][newY].setPiece(piece);
+                            break;
+                            case KILL:
+                            piece.move(newX, newY);
+                            boardContent[x0][y0].setPiece(null);
+                            boardContent[newX][newY].setPiece(piece);
 
-                    Piece otherPiece = result.getPiece();
-                    boardContent[boardLocation(otherPiece.getLastX())][boardLocation(otherPiece.getLastY())].setPiece(null);
-                    pieces.getChildren().remove(otherPiece);
-                    break;
-            }
-        });
+                            Piece otherPiece = result.getPiece();
+                            boardContent[boardLocation(otherPiece.getLastX())][boardLocation(otherPiece.getLastY())].setPiece(null);
+                            pieces.getChildren().remove(otherPiece);
+                            break;
+                            }
+                            });
 
-        return piece;
-    }
-	
-	public static void main(String[] args) 
-	{
-		launch(args);
-	}
-}
+                            return piece;
+                            }
+
+public static void main(String[] args){
+        launch(args);
+        }
+        }
