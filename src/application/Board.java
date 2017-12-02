@@ -120,21 +120,41 @@ public class Board extends Application
 
         int x0 = boardLocation(piece.getLastX());
         int y0 = boardLocation(piece.getLastY());
-        if (piece.getTeam() == PieceType.BLACK){
-            if (boardContent[newX][newY].hasPiece())
-                return new MoveResult(MoveType.NONE);
-        //-1
-            boardContent[x0][y0].removePiece();
-            //boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
-            return new MoveResult(MoveType.NORMAL);
 
+        if (boardContent[newX][newY].hasPiece())
+            return new MoveResult(MoveType.NONE);
+
+        if (piece.getTeam() == PieceType.BLACK){
+            if (newY == y0 - 2 && (newX == x0 -2) && boardContent[x0-1][y0-1].getPiece().getTeam() == PieceType.RED) {
+                boardContent[x0][y0].removePiece();
+                boardContent[x0 -1][y0 -1].removePiece();
+                return new MoveResult (MoveType.KILL, boardContent[x0-1][y0-1].getPiece());
+            }
+            if (newY == y0 - 2 && (newX == x0 +2) && boardContent[x0+1][y0-1].getPiece().getTeam() == PieceType.RED) {
+                boardContent[x0][y0].removePiece();
+                boardContent[x0 +1][y0 -1].removePiece();
+                return new MoveResult(MoveType.KILL, boardContent[x0+1][y0-1].getPiece());
+            }
+            if (newY == y0 - 1 && ((newX == x0 -1)||(newX == x0 +1))) {
+                boardContent[x0][y0].removePiece();
+                return new MoveResult(MoveType.NORMAL); }
         }
+
         if (piece.getTeam() == PieceType.RED){
-            if (boardContent[newX][newY].hasPiece())
-                return new MoveResult(MoveType.NONE);
-            boardContent[x0][y0].removePiece();
-            return new MoveResult(MoveType.NORMAL);
-        //1
+            if (newY == y0 + 2 && (newX == x0 -2) && boardContent[x0-1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
+                boardContent[x0][y0].removePiece();
+                boardContent[x0 +1][y0 +1].removePiece();
+                return new MoveResult (MoveType.KILL, boardContent[x0-1][y0+1].getPiece());
+            }
+            if (newY == y0 + 2 && (newX == x0 +2) && boardContent[x0+1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
+                boardContent[x0][y0].removePiece();
+                boardContent[x0 -1][y0 +1].removePiece();
+                return new MoveResult(MoveType.KILL, boardContent[x0+1][y0+1].getPiece());
+            }
+            if (newY == y0 + 1 && ((newX == x0 -1)||(newX == x0 +1))) {
+                boardContent[x0][y0].removePiece();
+                return new MoveResult(MoveType.NORMAL);
+            }
         }
         /**
         if (Math.abs(newX - x0) == 1 && newY - y0 == piece.getTeam().moveDir) 
