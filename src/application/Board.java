@@ -127,32 +127,38 @@ public class Board extends Application
         if (piece.getTeam() == PieceType.BLACK){
             if (newY == y0 - 2 && (newX == x0 -2) && boardContent[x0-1][y0-1].getPiece().getTeam() == PieceType.RED) {
                 boardContent[x0][y0].removePiece();
-                boardContent[x0 -1][y0 -1].removePiece();
+                //boardContent[x0 +1][y0 +1].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
                 return new MoveResult (MoveType.KILL, boardContent[x0-1][y0-1].getPiece());
             }
             if (newY == y0 - 2 && (newX == x0 +2) && boardContent[x0+1][y0-1].getPiece().getTeam() == PieceType.RED) {
                 boardContent[x0][y0].removePiece();
-                boardContent[x0 +1][y0 -1].removePiece();
+                //boardContent[x0 +1][y0 -1].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
                 return new MoveResult(MoveType.KILL, boardContent[x0+1][y0-1].getPiece());
             }
             if (newY == y0 - 1 && ((newX == x0 -1)||(newX == x0 +1))) {
                 boardContent[x0][y0].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
                 return new MoveResult(MoveType.NORMAL); }
         }
 
         if (piece.getTeam() == PieceType.RED){
             if (newY == y0 + 2 && (newX == x0 -2) && boardContent[x0-1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
                 boardContent[x0][y0].removePiece();
-                boardContent[x0 +1][y0 +1].removePiece();
+                //boardContent[x0 +1][y0 +1].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.RED,newX,newY));
                 return new MoveResult (MoveType.KILL, boardContent[x0-1][y0+1].getPiece());
             }
             if (newY == y0 + 2 && (newX == x0 +2) && boardContent[x0+1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
                 boardContent[x0][y0].removePiece();
-                boardContent[x0 -1][y0 +1].removePiece();
+                //boardContent[x0 -1][y0 +1].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.RED,newX,newY));
                 return new MoveResult(MoveType.KILL, boardContent[x0+1][y0+1].getPiece());
             }
             if (newY == y0 + 1 && ((newX == x0 -1)||(newX == x0 +1))) {
                 boardContent[x0][y0].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.RED,newX,newY));
                 return new MoveResult(MoveType.NORMAL);
             }
         }
@@ -213,7 +219,9 @@ public class Board extends Application
                             boardContent[newX][newY].setPiece(piece);
 
                             Piece otherPiece = result.getPiece();
-                            boardContent[boardLocation(otherPiece.getLastX())][boardLocation(otherPiece.getLastY())].setPiece(null);
+
+                                boardContent[boardLocation(otherPiece.getLastX())][boardLocation(otherPiece.getLastY())].removePiece();
+
                             pieces.getChildren().remove(otherPiece);
                             break;
                             }
