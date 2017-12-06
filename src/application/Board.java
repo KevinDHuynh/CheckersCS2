@@ -125,13 +125,13 @@ public class Board extends Application
             return new MoveResult(MoveType.NONE);
 
         if (piece.getTeam() == PieceType.BLACK){
-            if (newY == y0 - 2 && (newX == x0 -2) && boardContent[x0-1][y0-1].getPiece().getTeam() == PieceType.RED) {
+            if (newY == y0 - 2 && (newX == x0 -2) && boardContent[x0-1][y0-1].getPiece() != null && boardContent[x0-1][y0-1].getPiece().getTeam() == PieceType.RED) {
                 boardContent[x0][y0].removePiece();
                 //boardContent[x0 +1][y0 +1].removePiece();
                 boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
                 return new MoveResult (MoveType.KILL, boardContent[x0-1][y0-1].getPiece());
             }
-            if (newY == y0 - 2 && (newX == x0 +2) && boardContent[x0+1][y0-1].getPiece().getTeam() == PieceType.RED) {
+            if (newY == y0 - 2 && (newX == x0 +2) && boardContent[x0+1][y0-1].getPiece() != null && boardContent[x0+1][y0-1].getPiece().getTeam() == PieceType.RED) {
                 boardContent[x0][y0].removePiece();
                 //boardContent[x0 +1][y0 -1].removePiece();
                 boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
@@ -144,13 +144,13 @@ public class Board extends Application
         }
 
         if (piece.getTeam() == PieceType.RED){
-            if (newY == y0 + 2 && (newX == x0 -2) && boardContent[x0-1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
+            if (newY == y0 + 2 && (newX == x0 -2) && boardContent[x0-1][y0+1].getPiece() != null && boardContent[x0-1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
                 boardContent[x0][y0].removePiece();
                 //boardContent[x0 +1][y0 +1].removePiece();
                 boardContent[newX][newY].setPiece(new Piece(PieceType.RED,newX,newY));
                 return new MoveResult (MoveType.KILL, boardContent[x0-1][y0+1].getPiece());
             }
-            if (newY == y0 + 2 && (newX == x0 +2) && boardContent[x0+1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
+            if (newY == y0 + 2 && (newX == x0 +2) && boardContent[x0+1][y0+1].getPiece() != null && boardContent[x0+1][y0+1].getPiece().getTeam() == PieceType.BLACK) {
                 boardContent[x0][y0].removePiece();
                 //boardContent[x0 -1][y0 +1].removePiece();
                 boardContent[newX][newY].setPiece(new Piece(PieceType.RED,newX,newY));
