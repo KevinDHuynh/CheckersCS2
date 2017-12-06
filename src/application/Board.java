@@ -38,8 +38,8 @@ public class Board extends Application
 		Pane pane = new Pane();
 		pane.setPrefSize(WIDTH*SQUARE, HEIGHT*SQUARE);
 		pane.getChildren().addAll(squares, pieces);
-		
-		Button play = new Button("Let's Party");
+
+		//Button play = new Button("Let's Party");
 
 		logic Logic = new logic();
 		int[][] board = Logic.getBoard();
@@ -85,7 +85,7 @@ public class Board extends Application
 		}
 		root.getChildren().addAll(pane, hBox);
 		
-		hBox.getChildren().add(play);
+		//hBox.getChildren().add(play);
 		return root;
 	}
 	
