@@ -141,6 +141,14 @@ public class Board extends Application
                 boardContent[x0][y0].removePiece();
                 boardContent[newX][newY].setPiece(new Piece(PieceType.BLACK,newX,newY));
                 return new MoveResult(MoveType.NORMAL); }
+            if (newY == 0) {
+                boardContent[x0][y0].removePiece();
+                boardContent[newX][newY].setPiece(new Piece(PieceType.BLACKKING,newX,newY));
+                return new MoveResult(MoveType.NORMAL);
+            }
+        }
+        if (piece.getTeam() == PieceType.BLACKKING) {
+
         }
 
         if (piece.getTeam() == PieceType.RED){
@@ -161,6 +169,9 @@ public class Board extends Application
                 boardContent[newX][newY].setPiece(new Piece(PieceType.RED,newX,newY));
                 return new MoveResult(MoveType.NORMAL);
             }
+        }
+        if (piece.getTeam() == PieceType.REDKING){
+
         }
         /**
         if (Math.abs(newX - x0) == 1 && newY - y0 == piece.getTeam().moveDir) 
@@ -212,18 +223,24 @@ public class Board extends Application
                     piece.move(newX, newY);
                     boardContent[x0][y0].setPiece(null);
                     boardContent[newX][newY].setPiece(piece);
-                            break;
-                            case KILL:
-                            piece.move(newX, newY);
-                            boardContent[x0][y0].setPiece(null);
-                            boardContent[newX][newY].setPiece(piece);
-
-                            Piece otherPiece = result.getPiece();
-
-                                boardContent[boardLocation(otherPiece.getLastX())][boardLocation(otherPiece.getLastY())].removePiece();
-
-                            pieces.getChildren().remove(otherPiece);
-                            break;
+                    break;
+                case KILL:
+                    piece.move(newX, newY);
+                    boardContent[x0][y0].setPiece(null);
+                    boardContent[newX][newY].setPiece(piece);
+                    Piece otherPiece = result.getPiece();
+                    boardContent[boardLocation(otherPiece.getLastX())][boardLocation(otherPiece.getLastY())].removePiece();
+                    pieces.getChildren().remove(otherPiece);
+                    break;
+                case PROMOTE:
+                    piece.move(newX, newY);
+                    boardContent[x0][y0].setPiece(null);
+                    boolean red= boardContent[newX][newY].getPiece().getTeam() == PieceType.RED ? true : false;
+                    if (red)
+                    boardContent[newX][newY].getPiece().setTeam(PieceType.REDKING);
+                    else
+                        boardContent[newX][newY].getPiece().setTeam(PieceType.BLACKKING);
+                    break;
                             }
                             });
 

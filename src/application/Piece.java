@@ -6,7 +6,7 @@ import javafx.scene.shape.Ellipse;
 
 import static application.Board.SQUARE;
 
-public class Piece extends StackPane
+public class Piece extends StackPane implements Marker
 {
 	private PieceType type;
 	
@@ -45,7 +45,10 @@ public class Piece extends StackPane
 		move(x, y);
 		
 		Ellipse ellipse = new Ellipse(45, 45);
-		ellipse.setFill(type == PieceType.RED ? Color.RED : Color.BLACK);
+		if (type == PieceType.RED) ellipse.setFill(Color.RED);
+		else if (type == PieceType.BLACK) ellipse.setFill(Color.BLACK);
+		else if (type == PieceType.REDKING) ellipse.setFill(Color.CRIMSON);
+		else if (type == PieceType.BLACKKING) ellipse.setFill(Color.DARKSLATEGRAY);
 		ellipse.setStroke(Color.BLACK);
 		ellipse.setStrokeWidth(1);
 		ellipse.setTranslateX(3);
@@ -82,4 +85,5 @@ public class Piece extends StackPane
 	public void setTeam(PieceType p) {
 		type = p;
 	}
+
 }

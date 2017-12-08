@@ -2,5 +2,5 @@ package application;
 
 public enum MoveType 
 {
-	NONE, NORMAL, KILL;
+	NONE, NORMAL, KILL, PROMOTE;
 }
