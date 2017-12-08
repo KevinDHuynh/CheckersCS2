@@ -53,7 +53,7 @@ public class Board extends Application
 				square.setStrokeWidth(1);
 				boardContent[x][y] = square;
 				squares.getChildren().add(square);
-
+				/**
 				Piece p = null;
 				if (board[y][x] == 1){
                     p = makePiece(PieceType.RED, x, y);
@@ -61,8 +61,8 @@ public class Board extends Application
                 if (board[y][x] == 2){
                     p = makePiece(PieceType.BLACK, x, y);
                 }
+                **/
 
-                /**
 				Piece p = null;
 				
 				if (y <= 2 && (x + y) % 2 != 0) 
@@ -74,7 +74,7 @@ public class Board extends Application
                 {
                     p = makePiece(PieceType.BLACK, x, y);
                 }
-                **/
+
                 if (p != null) 
                 {
                     square.setPiece(p);
@@ -98,9 +98,9 @@ public class Board extends Application
 		primaryStage.show();
 	}
 	
-	public int boardLocation(double num)
+	public <E extends Number> int boardLocation(E num)
 	{
-		return (int)(num + SQUARE / 2) / SQUARE;
+		return (int)(num.intValue() + SQUARE / 2) / SQUARE;
 	}
 	
 	public int getSquareSize()

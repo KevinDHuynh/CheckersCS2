@@ -2,7 +2,7 @@ package application;
 import java.util.Scanner;
 public class logic {
 
-
+//Prototype program, not used in final code
         int red = 1;
         int black = 2;
         int[][] board;
